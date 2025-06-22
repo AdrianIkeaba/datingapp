@@ -25,91 +25,98 @@ struct ProfileCard: View {
             } else {
                 ProfileCardBackground(image: image, blur: name != "Bingham, 28")
                 
-                if name == "Bingham, 28" {
-                    VStack {
-                        HStack {
+                // Top overlay elements
+                VStack {
+                    HStack {
+                        // Left side - notification or megaphone
+                        if name == "Bingham, 28" {
                             ZStack {
                                 Circle()
-                                    .fill(Color.black.opacity(0.8))
-                                    .frame(width: 28, height: 28)
+                                    .fill(Color.black.opacity(0.6))
+                                    .frame(width: 32, height: 32)
                                 
                                 Text("📣")
-                                    .font(.system(size: 10))
+                                    .font(.system(size: 14))
                             }
-                            
+                        } else if hasNotification {
+                            HStack(spacing: 6) {
+                                Text("📣 They made a move!")
+                                    .font(.system(size: 9, weight: .medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 8)
+                            }
+                            .frame(height: 19)
+                            .background(Color.black.opacity(0.8))
+                            .cornerRadius(16)
+                        } else {
                             Spacer()
-                            
+                                .frame(width: 32, height: 32)
+                        }
+                        
+                        // Right side - timer for Bingham only
+                        if name == "Bingham, 28" {
+                            Spacer()
                             ZStack {
-
                                 Circle()
-                                    .fill(Color.gray.opacity(0.6))
-                                    .frame(width: 24, height: 24)
-                                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: 0, y: 2)
+                                    .fill(Color.white.opacity(0.2))
+                                    .frame(width: 32, height: 32)
                                 
                                 Circle()
                                     .trim(from: 0, to: 0.75)
-                                    .stroke(Color.white.opacity(0.8), lineWidth: 2)
-                                    .frame(width: 24, height: 24)
+                                    .stroke(Color.white, lineWidth: 2)
+                                    .frame(width: 26, height: 26)
                                     .rotationEffect(.degrees(-90))
                                 
                                 Text("16h")
-                                    .font(.system(size: 8, weight: .medium))
+                                    .font(.system(size: 9, weight: .medium))
                                     .foregroundColor(.white)
                             }
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.top, 16)
-                        
-                        Spacer()
                     }
-                }
-
-                if hasNotification && name != "Bingham, 28" {
-                    VStack {
-                        HStack {
-                            HStack(spacing: 4) {
-                                Text("📣")
-                                    .font(.system(size: 8))
-                                Text("They made a move!")
-                                    .font(.system(size: 8, weight: .medium))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(Color.black)
-                            .cornerRadius(20)
-                        }
-                        .padding(.top, 16)
-                        .padding(.horizontal, 12)
-                        Spacer()
-                    }
+                    .padding(.horizontal, 14)
+                    .padding(.top, 14)
+                    
+                    Spacer()
                 }
                 
+                // Center "Tap to answer" text
+                VStack {
+                    if (name != "Bingham, 28") {
+                        Spacer()
+                        Text("Tap to answer")
+                            .font(.system(size: 11, weight: .medium))
+                            .foregroundColor(Color(red: 168/255, green: 175/255, blue: 183/255))
+                        
+                        Spacer()
+                    }
+
+                }
+                
+                // Bottom content
                 VStack {
                     Spacer()
-                    VStack(spacing: 12) {
-                        Text("Tap to answer")
-                            .font(.system(size: 10, weight: .medium))
-                            .foregroundColor(.white.opacity(0.7))
+                    
+                    VStack(spacing: 0) {
+                        // Name
+                        Text(name)
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.bottom, 8)
                         
-                        VStack(spacing: 8) {
-                            Text(name)
-                                .font(.system(size: 15, weight: .bold))
-                                .foregroundColor(.white)
-                            
-                            Text(question)
-                                .font(.system(size: 10, weight: .medium))
-                                .foregroundColor(.white.opacity(0.8))
-                                .multilineTextAlignment(.center)
-                                .lineLimit(3)
-                        }
+                        // Question
+                        Text(question)
+                            .font(.system(size: 10, weight: .regular))
+                            .foregroundColor(Color(red: 207/255, green: 207/255, blue: 254/255))
+                            .multilineTextAlignment(.center)
+                            .lineLimit(3)
+                            .lineSpacing(2)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 24)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 20)
                 }
             }
         }
-        .frame(width: !isStackedCard ? 145 : 90, height: 205)
+        .frame(width: !isStackedCard ? 165 : 90, height: 233)
         .cornerRadius(20)
         .clipped()
     }
@@ -138,9 +145,9 @@ struct ProfileCardBackground: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: geo.size.width, height: geo.size.height)
-                .blur(radius: blur ? 25 : 0)
-                .overlay(blur ? Color.black.opacity(0.3) : Color.clear)
-                .cornerRadius(20)
+                .blur(radius: blur ? 20 : 0)
+                .overlay(blur ? Color.black.opacity(0.4) : Color.clear)
+                .cornerRadius(24)
                 .clipped()
         }
     }

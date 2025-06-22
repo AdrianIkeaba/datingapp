@@ -17,30 +17,29 @@ import Combine
              StarryBackground()
              
              VStack(spacing: 0) {
-
-                 VStack(spacing: 16) {
+                 VStack {
                      // Header
-                     HStack {
+                     HStack(alignment: .center) {
                          VStack(alignment: .leading, spacing: 4) {
-                             HStack {
+                             HStack(alignment: .center) {
                                  Text("Your Turn")
-                                     .font(.system(size: 32, weight: .bold))
+                                     .font(.system(size: 22, weight: .bold))
                                      .foregroundColor(.white)
                                  
 
                                  ZStack {
                                      Circle()
                                          .fill(Color(red: 0.71, green: 0.60, blue: 0.82))
-                                         .frame(width: 24, height: 24)
+                                         .frame(width: 18, height: 18)
                                      
                                      Text("7")
-                                         .font(.system(size: 14, weight: .bold))
+                                         .font(.system(size: 10, weight: .bold))
                                          .foregroundColor(.black)
                                  }
                              }
                              
                              Text("Make your move, they are waiting 🎵")
-                                 .font(.system(size: 16))
+                                 .font(.system(size: 12))
                                  .foregroundColor(.white.opacity(0.7))
                                  .italic()
                          }
@@ -72,7 +71,7 @@ import Combine
                                      .clipShape(Circle())
                                      .foregroundColor(.gray)
                              }
-                             .shadow(color: Color(red: 106/255.0, green: 98/255.0, blue: 159/255.0).opacity(0.3), radius: 10, x: 0, y: 5)
+                             .shadow(color: Color(red: 181 / 255, green: 178 / 255, blue: 255 / 255).opacity(0.5), radius: 8)
                              
                              HStack {
                                  Text("90")
@@ -91,7 +90,7 @@ import Combine
                      
                      // Game cards
                      ScrollView(.horizontal, showsIndicators: false) {
-                         HStack(spacing: 20) {
+                         HStack(spacing: 15) {
                              ProfileCard(
                                  name: "Amanda, 22",
                                  question: "What is your most favorite childhood memory?",
@@ -99,9 +98,7 @@ import Combine
                                  hasNotification: false,
                                  isStackedCard: false
                              )
-                             .frame(width: 145)
                              
-                            
                              ProfileCard(
                                  name: "Malte, 31",
                                  question: "What is the most important quality in friendships to you?",
@@ -109,7 +106,6 @@ import Combine
                                  hasNotification: true,
                                  isStackedCard: false
                              )
-                             .frame(width: 145)
                              
                              ProfileCard(
                                  name: "Bingham, 28",
@@ -118,7 +114,6 @@ import Combine
                                  hasNotification: false,
                                  isStackedCard: false
                              )
-                             .frame(width: 145)
                              
                              ProfileCard(
                                  name: "",
@@ -132,7 +127,6 @@ import Combine
                          .padding(.horizontal, 20)
                      }
                  }
-                 .padding(.top, 20)
                  
                  Spacer(minLength: 40)
                  
@@ -145,7 +139,7 @@ import Combine
                          
                          Text("Pending")
                              .font(.system(size: 22, weight: .bold))
-                             .foregroundColor(.white.opacity(0.4))
+                             .foregroundColor(Color(red: 95/255, green: 95/255, blue: 96/255))
                              .padding(.leading, 8)
                          
                          Spacer()
@@ -161,14 +155,14 @@ import Combine
                          Spacer()
                      }
                      .padding(.horizontal, 20)
-                     .padding(.bottom, 16)
+                     .padding(.bottom, 10)
                      
                      Text("The ice is broken. Time to hit it off")
-                         .font(.system(size: 16))
-                         .foregroundColor(.white.opacity(0.7))
+                         .font(.system(size: 12))
+                         .foregroundColor(Color(red: 168/255, green: 175/255, blue: 183/255))
                          .italic()
                          .padding(.horizontal, 20)
-                         .padding(.bottom, 20)
+                         .padding(.bottom, 10)
                      
                      ScrollView {
                          LazyVStack(spacing: 0) {
@@ -179,7 +173,7 @@ import Combine
                                  profileImage: "jessica",
                                  isVoiceMessage: true,
                                  voiceDuration: "00:58",
-                                 badge: nil,
+                                 badge: "badge",
                                  tag: "New chat"
                              )
                              
@@ -212,47 +206,25 @@ import Combine
                                  profileImage: "marie",
                                  isVoiceMessage: false,
                                  voiceDuration: nil,
-                                 badge: "4",
+                                 badge: "four",
                                  tag: "Your move"
                              )
                              
                              ChatRow(
                                  name: "Jessica",
-                                 message: "Looking forward to it!",
+                                 message: "",
                                  time: "6:21 pm",
                                  profileImage: "sila",
-                                 isVoiceMessage: false,
-                                 voiceDuration: nil,
+                                 isVoiceMessage: true,
+                                 voiceDuration: "00:56",
                                  badge: nil,
                                  tag: "Your move"
                              )
-                             
-                             ChatRow(
-                                 name: "Sarah",
-                                 message: "That sounds amazing! When are we meeting?",
-                                 time: "5:45 pm",
-                                 profileImage: "amanda",
-                                 isVoiceMessage: false,
-                                 voiceDuration: nil,
-                                 badge: "2",
-                                 tag: nil
-                             )
-                             
-                             ChatRow(
-                                 name: "Mike",
-                                 message: "You: Great! See you there",
-                                 time: "4:30 pm",
-                                 profileImage: "photo",
-                                 isVoiceMessage: false,
-                                 voiceDuration: nil,
-                                 badge: nil,
-                                 tag: "Your move"
-                             )
+                            
                          }
                      }
                      .background(Color.black.opacity(0.3))
                  }
-                 Spacer()
                  
                  CustomTabBar(selectedTab: $selectedTab)
              }
